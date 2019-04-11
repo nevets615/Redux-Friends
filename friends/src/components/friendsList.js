@@ -35,7 +35,7 @@ class FriendsList extends React.Component {
         <div className="Friends-list">
 
           {this.props.friends &&
-            this.props.friends.map((friend, index) => <h3>{friend.task}</h3>)}
+            this.props.friends.map((friend, index) => <h3>{friend.name}</h3>)}
         </div>
         <input
           type="text"
@@ -43,7 +43,7 @@ class FriendsList extends React.Component {
           placeholder="Add Friend"
           onChange={this.handleChanges}
         />
-        <button onClick={this.addFriends}>Add todo</button>
+        <button onClick={this.addFriends}>Add friend</button>
         <button onClick={this.filterFriends}>Clear</button>
       </>
     );

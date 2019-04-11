@@ -18,7 +18,9 @@ function App() {
     return (
       <div className="App">
         <h1>Friends List</h1>
+       
         <Router>
+        
       <div className="App">
         <ul>
           <li>

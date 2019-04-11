@@ -1,14 +1,26 @@
 import { ADD_FRIENDS, TOGGLE_FRIENDS, FILTER_FRIENDS } from "../actions";
-
+import {
+    LOGIN_START,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE,
+    FETCH_DATA_START,
+    FETCH_DATA_SUCCESS,
+    
+  } from '../actions/Friends'
 const initialState = {
-  todos: [
+  friends: [
     {
         id: 1,
         name: 'Joe',
         age: 24,
-        email: 'joe@lambdaschool.com'
+        email: 'joe@lambdaschool.com',
+        error: '',
+        fetchingData: false,
+        loggingIn: false
       }
     ] 
+    
+
 }
 function reducer(state = initialState, action) {
     switch (action.type) {
@@ -42,9 +54,51 @@ function reducer(state = initialState, action) {
           friends: state.friends.filter(friend => !friend.completed)
         };
   
-      default:
-        return state;
-    }
-  }
-  
+
+
+  case LOGIN_START:
+  return {
+    ...state,
+    error: '',
+    errorStatusCode: null,
+    fetchingData: false,
+    loggingIn: true
+  };
+case LOGIN_SUCCESS:
+  return {
+    ...state,
+    error: '',
+    loggingIn: false
+  };
+case FETCH_DATA_START:
+  return {
+    ...state,
+    error: '',
+    fetchingData: true,
+    errorStatusCode: null
+  };
+case FETCH_DATA_SUCCESS:
+  return {
+    ...state,
+    error: '',
+    errorStatusCode: null,
+    fetchingData: false,
+    gasPrices: action.payload
+      .filter(price => price.type === 'Gasoline - Regular')
+      .filter(
+        price =>
+          price.location === 'US' || price.location === 'State of Hawaii'
+      )
+  };
+// case FETCH_DATA_FAILURE:
+//   return {
+//     ...state,
+//     fetchingData: false,
+//     error: action.payload.data.error,
+//     errorStatusCode: action.payload.status
+//   };
+  default:
+  return state;
+}
+}
   export default reducer;

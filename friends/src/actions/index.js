@@ -40,3 +40,4 @@ export const addFriends = name => {
       })
       .catch(err => console.log(err));
   };
+
